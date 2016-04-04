@@ -1,0 +1,10 @@
+deepsecurityagent::params::dsmconsoleaddress: "app.deepsecurity.trendmicro.com"
+deepsecurityagent::params::dsmheartbeataddress: "agents.deepsecurity.trendmicro.com"
+deepsecurityagent::params::dsmheartbeatport: "443"
+deepsecurityagent::params::dsmconsoleport: "443"
+deepsecurityagent::params::dsmtenantid: ""
+deepsecurityagent::params::dsmtenantpassword: ""
+deepsecurityagent::params::policyid: ""
+deepsecurityagent::params::activate: false
+deepsecurityagent::activation::dsmheartbeataddress: "app.deepsecurity.trendmicro.com"
+deepsecurityagent::activation::dsmheartbeatport: "443"

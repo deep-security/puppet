@@ -1,0 +1,14 @@
+{
+  "name": "trendmicro-deepsecurityagent",
+  "version": "0.1.0",
+  "author": "trendmicro",
+  "summary": "This module manages the Trend Micro Deep Security Agent",
+  "license": "MIT",
+  "source": "https://github.com/deep-security/puppet",
+  "issues_url": "https://github.com/deep-security/puppet/issues",
+  "project_page": "https://github.com/deep-security/puppet",
+  "dependencies": [
+    {"version_requirement":">= 1.0.0","name":"puppetlabs-stdlib"}
+  ]
+}
+
