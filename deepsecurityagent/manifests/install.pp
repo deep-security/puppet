@@ -97,7 +97,7 @@ class deepsecurityagent::install inherits deepsecurityagent {
   }
     'Debian' :{
       exec { 'Download_Ubuntu_Agent':
-        command	=> 'curl -k https://${dsmurl}/software/agent/Ubuntu_14.04/x86_64/ -o /tmp/agent.deb',
+        command	=> "curl -k https://${dsmurl}/software/agent/Ubuntu_14.04/x86_64/ -o /tmp/agent.deb",
         creates => '/tmp/agent.deb',
         path => '/usr/bin/',
       }
@@ -105,20 +105,20 @@ class deepsecurityagent::install inherits deepsecurityagent {
         ensure => 'installed',
         provider => 'dpkg',
         source => '/tmp/agent.deb',
+        require => Exec["Download_Ubuntu_Agent"],
       }
     }
     'windows' : {
-#      exec { 'Download_Windows_Agent':
-#        command      => 'Invoke-WebRequest $agentsource -outfile ${::env_windows_installdir}\agent.msi',
-#        path         => 'C:\Windows\sysnative\'
-#        creates      => '${::env_windows_installdir}\agent.msi'
-#      }
+      exec { 'Download_Windows_Agent':
+        command      => "[Net.ServicePointManager]::ServerCertificateValidationCallback = {$true}; Invoke-WebRequest $agentsource -outfile ${::env_windows_installdir}\agent.msi",
+        path         => "C:\\Windows\\sysnative\\",
+        creates      => "${::env_windows_installdir}\agent.msi"
+      }
       package { $deepsecurityagent::params::agentpackage:
         ensure => 'installed',
         source => $agentsource,
-#        source => '${::env_windows_installdir}\agent.msi'
-
-#        require => 'Exec'
+        source => "${::env_windows_installdir}\agent.msi",
+        require => Exec["Download_Windows_Agent"]
         
       }
     }
