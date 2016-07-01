@@ -40,8 +40,8 @@ class deepsecurityagent (
   $dsmconsoleaddress = $deepsecurityagent::params::dsmconsoleaddress,
   $dsmheartbeatport = $deepsecurityagent::params::dsmheartbeatport,
   $dsmconsoleport = $deepsecurityagent::params::dsmconsoleport,
-  $dsmtenantid = $deepsecurityagent::params::tenantid,
-  $dsmtenantpassword = $deepsecurityagent::params::tenantpassword,
+  $dsmtenantid = $deepsecurityagent::params::dsmtenantid,
+  $dsmtenantpassword = $deepsecurityagent::params::dsmtenantpassword,
   $policyid = $deepsecurityagent::params::policyid,
   $activate = false,
 ) inherits deepsecurityagent::params {
