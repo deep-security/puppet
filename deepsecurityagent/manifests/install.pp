@@ -110,14 +110,13 @@ class deepsecurityagent::install inherits deepsecurityagent {
     }
     'windows' : {
       exec { 'Download_Windows_Agent':
-        command      => "[Net.ServicePointManager]::ServerCertificateValidationCallback = {$true}; Invoke-WebRequest $agentsource -outfile ${::env_windows_installdir}\agent.msi",
+        command      => "[Net.ServicePointManager]::ServerCertificateValidationCallback = {$true}; Invoke-WebRequest $agentsource -outfile ${::env_windows_installdir}\\agent.msi",
         path         => "C:\\Windows\\sysnative\\",
-        creates      => "${::env_windows_installdir}\agent.msi"
+        creates      => "${::env_windows_installdir}\\agent.msi"
       }
       package { $deepsecurityagent::params::agentpackage:
         ensure => 'installed',
-        source => $agentsource,
-        source => "${::env_windows_installdir}\agent.msi",
+        source => "${::env_windows_installdir}\\agent.msi",
         require => Exec["Download_Windows_Agent"]
         
       }
