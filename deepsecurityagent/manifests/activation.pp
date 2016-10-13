@@ -7,7 +7,8 @@ class deepsecurityagent::activation (
   $dsmtenantpassword = $deepsecurityagent::dsmtenantpassword,
   $policyid = $deepsecurityagent::policyid,
 ) inherits deepsecurityagent {
-	
+	notice ("tenantid is ${dsmtenantid}")
+  notice ("tenantpassword is ${dsmtenantpassword}")
   $dsmheartbeaturl = "dsm://${dsmheartbeataddress}:${dsmheartbeatport}/"
   if $dsmtenantid == '' {
   	$tenantarguments = ''
@@ -30,13 +31,13 @@ class deepsecurityagent::activation (
   }
   else {
   	exec {"sleep":
-    command => 'timeout /t 10',
-    path => '%WINDIR%\\System32\\',
-  }
-  }
+    command => 'ping 127.0.0.1 -n 10',
+    path => $::path,
+      }
+    }
   notice ("activation command is ${deepsecurityagent::params::dsa_control} -a ${dsmheartbeaturl} ${arguments}")
-  exec { "Deep Security Agent Tenant Activation":
+  exec { "Deep Security Agent Activation":
     command => "${deepsecurityagent::params::dsa_control} -a ${dsmheartbeaturl} ${arguments}",
-  }
+    }
 
 }

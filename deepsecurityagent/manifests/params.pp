@@ -9,8 +9,9 @@ class deepsecurityagent::params {
 
   case $::osfamily {
     'windows' : {
-      $dsa_control      = '%ProgramFiles%/Trend Micro/Deep Security/dsa_control'
+      $dsa_control      = '"C:\Program Files\Trend Micro\Deep Security Agent\dsa_control.cmd"'
       $agentpackage = 'Trend Micro Deep Security Agent'
+      $agentservice = 'ds_agent'
     }
     'AIX' : {
       $dsa_control      = '/opt/ds_agent/dsa_control'

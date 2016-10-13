@@ -110,7 +110,7 @@ class deepsecurityagent::install inherits deepsecurityagent {
     }
     'windows' : {
       exec { 'Download_Windows_Agent':
-        command      => "[Net.ServicePointManager]::ServerCertificateValidationCallback = {$true}; Invoke-WebRequest $agentsource -outfile ${::env_windows_installdir}\\agent.msi",
+        command      => "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -Command \"& { [Net.ServicePointManager]::ServerCertificateValidationCallback = {\$true}; (New-Object System.Net.WebClient).DownloadFile(\\\"${agentsource}\\\", \\\"${::env_windows_installdir}\\agent.msi\\\") } \"",
         path         => "C:\\Windows\\sysnative\\",
         creates      => "${::env_windows_installdir}\\agent.msi"
       }
