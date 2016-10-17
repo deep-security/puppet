@@ -69,7 +69,7 @@ class deepsecurityagent::install inherits deepsecurityagent {
   notice("Downloading agent from ${agentsource}")
 
   case $::osfamily {
-    'Redhat', 'CentOS', 'Amazon', 'Linux' :{
+    'Redhat', 'CentOS', 'Amazon', 'Linux', 'SuSE' :{
       if $::operatingsystemmajrelease == 5 {
         case $::architecture {
           'x86' : {$agentfilesourceR5 = "${dsmurl}/RedHat_EL5/i386/"}
