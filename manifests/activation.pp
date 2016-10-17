@@ -25,13 +25,13 @@ class deepsecurityagent::activation (
   $arguments = "${tenantarguments} ${policyargument}"
   if $::osfamily != 'windows' {
     exec {"sleep":
-      command => "sleep 10",
+      command => "sleep 15",
       path => "/usr/bin:/bin",
     }
   }
   else {
   	exec {"sleep":
-    command => 'ping 127.0.0.1 -n 10',
+    command => 'ping 127.0.0.1 -n 50',
     path => $::path,
       }
     }
