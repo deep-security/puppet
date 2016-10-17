@@ -38,6 +38,7 @@ class deepsecurityagent::activation (
   notice ("activation command is ${deepsecurityagent::params::dsa_control} -a ${dsmheartbeaturl} ${arguments}")
   exec { "Deep Security Agent Activation":
     command => "${deepsecurityagent::params::dsa_control} -a ${dsmheartbeaturl} ${arguments}",
+    require => Exec["sleep"],
     }
 
 }
