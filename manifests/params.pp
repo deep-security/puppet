@@ -13,7 +13,7 @@ class deepsecurityagent::params {
       $agentpackage = 'Trend Micro Deep Security Agent'
       $agentservice = 'ds_agent'
     }
-    'AIX' : {
+    'SuSE' : {
       $dsa_control      = '/opt/ds_agent/dsa_control'
       $agentpackage = 'ds_agent'
       $agentservice = 'ds_agent'
