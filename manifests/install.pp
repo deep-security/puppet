@@ -69,7 +69,7 @@ class deepsecurityagent::install inherits deepsecurityagent {
   notice("Downloading agent from ${agentsource}")
 
   case $::osfamily {
-    'Redhat', 'CentOS', 'Amazon', 'Linux', 'Suse' :{
+    'Redhat', 'CentOS', 'Amazon', 'Linux' :{
       if $::operatingsystemmajrelease == 5 {
         case $::architecture {
           'x86' : {$agentfilesourceR5 = "${dsmurl}/RedHat_EL5/i386/"}
@@ -95,6 +95,19 @@ class deepsecurityagent::install inherits deepsecurityagent {
       }
     }
   }
+    'Suse' :{
+      exec { 'Download_Suse_Agent':
+        command	=> "curl -k ${agentsource} -o /tmp/agent.rpm",
+        creates => '/tmp/agent.rpm',
+        path => '/usr/bin/',
+      }
+      package { $deepsecurityagent::params::agentpackage:
+        ensure => 'installed',
+        provider => 'rpm',
+        source => '/tmp/agent.rpm',
+        require => Exec["Download_Suse_Agent"],
+      }
+    }
     'Debian' :{
       exec { 'Download_Ubuntu_Agent':
         command	=> "curl -k ${agentsource} -o /tmp/agent.deb",
