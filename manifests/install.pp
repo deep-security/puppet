@@ -97,7 +97,7 @@ class deepsecurityagent::install inherits deepsecurityagent {
   }
     'Debian' :{
       exec { 'Download_Ubuntu_Agent':
-        command	=> "curl -k https://${dsmurl}/software/agent/Ubuntu_14.04/x86_64/ -o /tmp/agent.deb",
+        command	=> "curl -k ${dsmurl}/software/agent/Ubuntu_14.04/x86_64/ -o /tmp/agent.deb",
         creates => '/tmp/agent.deb',
         path => '/usr/bin/',
       }
