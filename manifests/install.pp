@@ -48,7 +48,7 @@ class deepsecurityagent::install inherits deepsecurityagent {
     }
     'SLES' : {
       case $::architecture {
-        'x86' : {
+        'i386' : {
           case $::operatingsystemmajrelease {
             '10'     : {$agentsource = "${dsmurl}/SuSE_10/i386/"}
             '11'     : {$agentsource = "${dsmurl}/SuSE_11/i386/"}
