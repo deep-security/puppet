@@ -1,7 +1,7 @@
 class deepsecurityagent::install inherits deepsecurityagent {
   $dsmurl = "https://${dsmconsoleaddress}:${dsmconsoleport}/software/agent"
 
-  notice("Install Class determine OS" )
+  debug('Install Class determine OS')
 
   case $::operatingsystem {
     'windows' : {
@@ -66,7 +66,7 @@ class deepsecurityagent::install inherits deepsecurityagent {
     default: { fail("Please check to ensure you are running an operating system supported by Deep Security Agent and this module") }
   }
 
-  notice("Downloading agent from ${agentsource}")
+  debug("Downloading agent from ${agentsource}")
 
   case $::osfamily {
     'Redhat', 'CentOS', 'Amazon', 'Linux' :{

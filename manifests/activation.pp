@@ -7,8 +7,8 @@ class deepsecurityagent::activation (
   $dsmtenantpassword = $deepsecurityagent::dsmtenantpassword,
   $policyid = $deepsecurityagent::policyid,
 ) inherits deepsecurityagent {
-	notice ("tenantid is ${dsmtenantid}")
-  notice ("tenantpassword is ${dsmtenantpassword}")
+  debug("tenantid is ${dsmtenantid}")
+  debug("tenantpassword is ${dsmtenantpassword}")
   $dsmheartbeaturl = "dsm://${dsmheartbeataddress}:${dsmheartbeatport}/"
   if $dsmtenantid == '' {
   	$tenantarguments = ''
@@ -37,7 +37,7 @@ class deepsecurityagent::activation (
     creates => $deepsecurityagent::params::dsa_config_file,
       }
     }
-  notice ("activation command is ${deepsecurityagent::params::dsa_control} -a ${dsmheartbeaturl} ${arguments}")
+  debug("activation command is ${deepsecurityagent::params::dsa_control} -a ${dsmheartbeaturl} ${arguments}")
   exec { "Deep Security Agent Activation":
     command => "${deepsecurityagent::params::dsa_control} -a ${dsmheartbeaturl} ${arguments}",
     require => Exec["sleep"],
