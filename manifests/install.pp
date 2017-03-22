@@ -131,7 +131,7 @@ class deepsecurityagent::install inherits deepsecurityagent {
         ensure => 'installed',
         source => "${::env_windows_installdir}\\agent.msi",
         require => Exec["Download_Windows_Agent"]
-        
+
       }
     }
   }
