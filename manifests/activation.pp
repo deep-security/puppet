@@ -27,18 +27,21 @@ class deepsecurityagent::activation (
     exec {"sleep":
       command => "sleep 15",
       path => "/usr/bin:/bin",
+      creates => $deepsecurityagent::params::dsa_config_file,
     }
   }
   else {
   	exec {"sleep":
     command => 'ping 127.0.0.1 -n 50',
     path => $::path,
+    creates => $deepsecurityagent::params::dsa_config_file,
       }
     }
   notice ("activation command is ${deepsecurityagent::params::dsa_control} -a ${dsmheartbeaturl} ${arguments}")
   exec { "Deep Security Agent Activation":
     command => "${deepsecurityagent::params::dsa_control} -a ${dsmheartbeaturl} ${arguments}",
     require => Exec["sleep"],
+    creates => $deepsecurityagent::params::dsa_config_file,
     }
 
 }
