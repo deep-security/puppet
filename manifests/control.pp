@@ -1,8 +1,7 @@
 # Define: deepsecurityagent::control
- # Parameters:
- # arguments
- #
- define deepsecurityagent::control (arguments) {
- 	# puppet code
- 	
- } 
+# Parameters:
+# arguments
+#
+define deepsecurityagent::control () {
+  # puppet code
+}

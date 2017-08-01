@@ -46,7 +46,7 @@ class deepsecurityagent (
   $activate = false,
 ) inherits deepsecurityagent::params {
 
-  notice ("called with activation = $activate")
+  debug("called with activation = $activate")
   if $activate == false {
 
     class { '::deepsecurityagent::install': } ->
