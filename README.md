@@ -42,7 +42,9 @@ Requires a Deep Security Manager FQDN. Defaults to Trend Micro Deep Security as 
 
 Bare minimum configuration for a node is:
 
+```
 class { "deepsecurity" : }
+```
 
 This will default to installing the latest package from Trend Micro Deep Security as a Service, and will not activate the agent.
 
@@ -50,28 +52,33 @@ This will default to installing the latest package from Trend Micro Deep Securit
 
 To install package from a Deep Security Manager other than Trend Micro Deep Security as a Service:
 
+```
 class { "deepsecurityagent" :
   dsmheartbeataddress => 'dsm.heartbeat.domain.tld',
-  dsmconsoleaddress => 'dsm.console.domain.tld',
-  dsmheartbeatport => '4120',
-  dsmconsoleport => '4119',
+  dsmconsoleaddress   => 'dsm.console.domain.tld',
+  dsmheartbeatport    => '4120',
+  dsmconsoleport      => '4119',
 }
+```
 
 To activate the agent against a managed service (tenant ID and password are optional):
 
+```
 class { "deepsecurityagent::activation" :
-  dsmtenantid => 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX',
+  dsmtenantid       => 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX',
   dsmtenantpassword => 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX',
 }
+```
 
 To activate and request a policy (tenant ID and password are optional):
 
+```
 class { "deepsecurityagent::activation" :
-  dsmtenantid => 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX',
+  dsmtenantid       => 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX',
   dsmtenantpassword => 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX',
-  policyid => '1'
+  policyid          => '1'
 }
-
+```
 
 ## Reference
 

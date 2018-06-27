@@ -28,6 +28,18 @@ describe 'deepsecurityagent' do
     include_context 'a successful compile and common tests', 'ds_agent'
   end
 
+  context 'on Oracle Linux distributions' do
+    let(:facts) do
+      {
+        osfamily: 'RedHat',
+        operatingsystem: 'OracleLinux',
+        architecture: 'x86_64'
+      }
+    end
+
+    include_context 'a successful compile and common tests', 'ds_agent'
+  end
+
   context 'on Ubuntu distributions' do
     let(:facts) do
       {

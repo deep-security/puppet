@@ -69,6 +69,19 @@ describe 'deepsecurityagent::activation' do
     include_context 'successfully handle parameters'
   end
 
+  context 'on Oracle Linux distributions' do
+    let(:facts) do
+      {
+        osfamily: 'RedHat',
+        operatingsystem: 'OracleLinux',
+        architecture: 'x86_64'
+      }
+    end
+
+    include_context 'a successful linux activation'
+    include_context 'successfully handle parameters'
+  end
+
   context 'on Ubuntu distributions' do
     let(:facts) do
       {
