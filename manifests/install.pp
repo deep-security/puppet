@@ -10,7 +10,7 @@ class deepsecurityagent::install inherits deepsecurityagent {
         'x64'	: {$agentsource = "${dsmurl}/Windows/x86_64/"}
       }
     }
-    'RedHat', 'CentOS' : {
+    'RedHat', 'CentOS', 'OracleLinux' : {
       case $::architecture {
         'x86' : {
           case $::operatingsystemmajrelease {
