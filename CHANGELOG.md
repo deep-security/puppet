@@ -6,7 +6,7 @@ FEATURES:
 
 IMPROVEMENTS:
 
-* Support Oracle Linux Distriubution
+* Support Oracle Linux Distribution
 
 BUG FIXES:
 
