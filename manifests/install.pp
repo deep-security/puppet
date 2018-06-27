@@ -10,7 +10,7 @@ class deepsecurityagent::install inherits deepsecurityagent {
         'x64'	: {$agentsource = "${dsmurl}/Windows/x86_64/"}
       }
     }
-    'RedHat', 'CentOS', 'OracleLinux' : {
+    'RedHat', 'CentOS' : {
       case $::architecture {
         'x86' : {
           case $::operatingsystemmajrelease {
@@ -22,16 +22,33 @@ class deepsecurityagent::install inherits deepsecurityagent {
         'x86_64' : {
           case $::operatingsystemmajrelease {
             '4'	: {$agentsource = "${dsmurl}/RedHat_2.6.9_34.EL_x86_64/x86_64/"}
-            '5'     : {$agentsource = "${dsmurl}/RedHat_EL5/x86_64/"}
-            '6'     : {$agentsource = "${dsmurl}/RedHat_EL6/x86_64/"}
-            '7'     : {$agentsource = "${dsmurl}/RedHat_EL7/x86_64/"}
+            '5' : {$agentsource = "${dsmurl}/RedHat_EL5/x86_64/"}
+            '6' : {$agentsource = "${dsmurl}/RedHat_EL6/x86_64/"}
+            '7' : {$agentsource = "${dsmurl}/RedHat_EL7/x86_64/"}
+          }
+        }
+      }
+    }
+    'OracleLinux' : {
+      case $::architecture {
+        'x86' : {
+          case $::operatingsystemmajrelease {
+            '5'	: {$agentsource = "${dsmurl}/Oracle_OL5/i386/"}
+            '6'	: {$agentsource = "${dsmurl}/Oracle_OL6/i386/"}
+          }
+        }
+        'x86_64' : {
+          case $::operatingsystemmajrelease {
+            '5' : {$agentsource = "${dsmurl}/Oracle_OL5/x86_64/"}
+            '6' : {$agentsource = "${dsmurl}/Oracle_OL6/x86_64/"}
+            '7' : {$agentsource = "${dsmurl}/Oracle_OL7/x86_64/"}
           }
         }
       }
     }
     'Amazon' : {
       case $::architecture {
-        'x86' : {$agentsource = "${dsmurl}/amzn1/i386/"}
+        'x86'    : {$agentsource = "${dsmurl}/amzn1/i386/"}
         'x86_64' : {$agentsource = "${dsmurl}/amzn1/x86_64/"}
       }
     }
@@ -39,9 +56,9 @@ class deepsecurityagent::install inherits deepsecurityagent {
       case $::architecture {
         'amd64' : {
           case $::operatingsystemrelease {
-            '10.04'     : {$agentsource = "${dsmurl}/Ubuntu_10.04/x86_64/"}
-            '12.04'     : {$agentsource = "${dsmurl}/Ubuntu_12.04/x86_64/"}
-            '14.04'     : {$agentsource = "${dsmurl}/Ubuntu_14.04/x86_64/"}
+            '10.04' : {$agentsource = "${dsmurl}/Ubuntu_10.04/x86_64/"}
+            '12.04' : {$agentsource = "${dsmurl}/Ubuntu_12.04/x86_64/"}
+            '14.04' : {$agentsource = "${dsmurl}/Ubuntu_14.04/x86_64/"}
           }
         }
       }
@@ -50,15 +67,15 @@ class deepsecurityagent::install inherits deepsecurityagent {
       case $::architecture {
         'i386' : {
           case $::operatingsystemmajrelease {
-            '10'     : {$agentsource = "${dsmurl}/SuSE_10/i386/"}
-            '11'     : {$agentsource = "${dsmurl}/SuSE_11/i386/"}
+            '10' : {$agentsource = "${dsmurl}/SuSE_10/i386/"}
+            '11' : {$agentsource = "${dsmurl}/SuSE_11/i386/"}
           }
         }
         'x86_64' : {
           case $::operatingsystemmajrelease {
-            '10'     : {$agentsource = "${dsmurl}/SuSE_10/x86_64/"}
-            '11'     : {$agentsource = "${dsmurl}/SuSE_11/x86_64/"}
-            '12'     : {$agentsource = "${dsmurl}/SuSE_12/x86_64/"}
+            '10' : {$agentsource = "${dsmurl}/SuSE_10/x86_64/"}
+            '11' : {$agentsource = "${dsmurl}/SuSE_11/x86_64/"}
+            '12' : {$agentsource = "${dsmurl}/SuSE_12/x86_64/"}
           }
         }
       }
