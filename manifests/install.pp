@@ -93,7 +93,7 @@ class deepsecurityagent::install inherits deepsecurityagent {
           'x86_64' : {$agentfilesourceR5 = "${dsmurl}/RedHat_EL5/x86_64/"}
         }
         exec { 'Download_RHEL5_Agent':
-          command => "curl -k ${agentfilesourceR5} -o /tmp/agent.rpm",
+          command => "curl --connect-timeout 30 -k ${agentfilesourceR5} -o /tmp/agent.rpm",
           creates => "/tmp/agent.rpm",
           path => '/usr/bin',
         }
@@ -114,7 +114,7 @@ class deepsecurityagent::install inherits deepsecurityagent {
   }
     'Suse' :{
       exec { 'Download_Suse_Agent':
-        command	=> "curl -k ${agentsource} -o /tmp/agent.rpm",
+        command	=> "curl --connect-timeout 30 -k ${agentsource} -o /tmp/agent.rpm",
         creates => '/tmp/agent.rpm',
         path => '/usr/bin/',
       }
@@ -127,7 +127,7 @@ class deepsecurityagent::install inherits deepsecurityagent {
     }
     'Debian' :{
       exec { 'Download_Ubuntu_Agent':
-        command	=> "curl -k ${agentsource} -o /tmp/agent.deb",
+        command	=> "curl --connect-timeout 30 -k ${agentsource} -o /tmp/agent.deb",
         creates => '/tmp/agent.deb',
         path => '/usr/bin/',
       }
