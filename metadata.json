@@ -1,6 +1,6 @@
 {
   "name": "trendmicro-deepsecurityagent",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "trendmicro",
   "summary": "This module manages the Trend Micro Deep Security Agent",
   "license": "MIT",

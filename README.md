@@ -2,9 +2,9 @@
 
 ## Support
 
-This is a community project and while you will see contributions from the Deep Security team, there is no official Trend Micro support for this project. The official documentation for the Deep Security APIs is available from the [Trend Micro Online Help Centre](http://docs.trendmicro.com/en-us/enterprise/deep-security.aspx). 
+This is a community project and while you will see contributions from the Deep Security team, there is no official Trend Micro support for this project. The official documentation for the Deep Security APIs is available from the [Trend Micro Online Help Centre](http://docs.trendmicro.com/en-us/enterprise/deep-security.aspx).
 
-Tutorials, feature-specific help, and other information about Deep Security is available from the [Deep Security Help Center](https://help.deepsecurity.trendmicro.com/Welcome.html). 
+Tutorials, feature-specific help, and other information about Deep Security is available from the [Deep Security Help Center](https://help.deepsecurity.trendmicro.com/Welcome.html).
 
 For Deep Security specific issues, please use the regular Trend Micro support channels. For issues with the code in this repository, please [open an issue here on GitHub](https://github.com/deep-security/puppet/issues).
 
@@ -70,6 +70,19 @@ class { "deepsecurityagent::activation" :
   dsmtenantid => 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX',
   dsmtenantpassword => 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX',
   policyid => '1'
+}
+
+To specify download and install options for the package, e.g. insecurely download rpm, install locally and skip verification:
+
+class { "deepsecurityagent" :
+  dsmheartbeataddress => 'dsm.heartbeat.domain.tld',
+  dsmconsoleaddress => 'dsm.console.domain.tld',
+  dsmheartbeatport => '4120',
+  dsmconsoleport => '4119',
+  local_rpm_install => true,
+  curl_command => 'curl -k',
+  download_opts => '--insecure --silent --tlsv1.2',
+  install_opts => '--nosignature',
 }
 
 

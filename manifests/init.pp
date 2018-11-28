@@ -36,25 +36,29 @@
 # Copyright 2015 Your name here, unless otherwise noted.
 #
 class deepsecurityagent (
-  $dsmheartbeataddress = $deepsecurityagent::params::dsmagentaddress,
-  $dsmconsoleaddress = $deepsecurityagent::params::dsmconsoleaddress,
-  $dsmheartbeatport = $deepsecurityagent::params::dsmheartbeatport,
-  $dsmconsoleport = $deepsecurityagent::params::dsmconsoleport,
-  $dsmtenantid = $deepsecurityagent::params::dsmtenantid,
-  $dsmtenantpassword = $deepsecurityagent::params::dsmtenantpassword,
-  $policyid = $deepsecurityagent::params::policyid,
-  $activate = false,
+        Boolean $activate               = $deepsecurityagent::params::activate,
+        String $dsmheartbeataddress     = $deepsecurityagent::params::dsmagentaddress,
+        String $dsmconsoleaddress       = $deepsecurityagent::params::dsmconsoleaddress,
+        String $dsmheartbeatport        = $deepsecurityagent::params::dsmheartbeatport,
+        String $dsmconsoleport          = $deepsecurityagent::params::dsmconsoleport,
+        Optional[String] $dsmtenantid   = $deepsecurityagent::params::dsmtenantid,
+        Optional[String] $dsmtenantpassword     = $deepsecurityagent::params::dsmtenantpassword,
+        Optional[String] $policyid      = $deepsecurityagent::params::policyid,
+        String $curl_command            = $deepsecurityagent::params::curl_command,
+        Optional[String] $download_opts = $deepsecurityagent::params::download_opts,
+        Optional[String] $install_opts  = $deepsecurityagent::params::install_opts,
+        Boolean $local_rpm_install      = $deepsecurityagent::params::local_rpm_install,
 ) inherits deepsecurityagent::params {
 
-  debug("called with activation = $activate")
-  if $activate == false {
+        debug("called with activation = $activate")
 
-    class { '::deepsecurityagent::install': } ->
-    class { '::deepsecurityagent::service': }
-  }
-  else {
-  	class { '::deepsecurityagent::install': } ->
-    class { '::deepsecurityagent::service': } ->
-    class { '::deepsecurityagent::activation': }
-  }
+        if $activate == false {
+                class { '::deepsecurityagent::install': } ->
+                class { '::deepsecurityagent::service': }
+        }
+        else {
+        	class { '::deepsecurityagent::install': } ->
+                class { '::deepsecurityagent::service': } ->
+                class { '::deepsecurityagent::activation': }
+        }
 }
