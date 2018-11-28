@@ -51,44 +51,42 @@ This will default to installing the latest package from Trend Micro Deep Securit
 To install package from a Deep Security Manager other than Trend Micro Deep Security as a Service:
 
 class { "deepsecurityagent" :
-  dsmheartbeataddress => 'dsm.heartbeat.domain.tld',
-  dsmconsoleaddress => 'dsm.console.domain.tld',
-  dsmheartbeatport => '4120',
-  dsmconsoleport => '4119',
+        dsmheartbeataddress => 'dsm.heartbeat.domain.tld',
+        dsmconsoleaddress => 'dsm.console.domain.tld',
+        dsmheartbeatport => '4120',
+        dsmconsoleport => '4119',
 }
 
 To activate the agent against a managed service (tenant ID and password are optional):
 
 class { "deepsecurityagent::activation" :
-  dsmtenantid => 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX',
-  dsmtenantpassword => 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX',
+        dsmtenantid => 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX',
+        dsmtenantpassword => 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX',
 }
 
 To activate and request a policy (tenant ID and password are optional):
 
 class { "deepsecurityagent::activation" :
-  dsmtenantid => 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX',
-  dsmtenantpassword => 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX',
-  policyid => '1'
+        dsmtenantid => 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX',
+        dsmtenantpassword => 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX',
+        policyid => '1'
 }
 
 To specify download and install options for the package, e.g. insecurely download rpm, install locally and skip verification:
 
 class { "deepsecurityagent" :
-  dsmheartbeataddress => 'dsm.heartbeat.domain.tld',
-  dsmconsoleaddress => 'dsm.console.domain.tld',
-  dsmheartbeatport => '4120',
-  dsmconsoleport => '4119',
-  local_rpm_install => true,
-  curl_command => 'curl -k',
-  download_opts => '--insecure --silent --tlsv1.2',
-  install_opts => '--nosignature',
+        dsmheartbeataddress => 'dsm.heartbeat.domain.tld',
+        dsmconsoleaddress => 'dsm.console.domain.tld',
+        dsmheartbeatport => '4120',
+        dsmconsoleport => '4119',
+        local_rpm_install => true,
+        curl_command => 'curl -k',
+        download_opts => '--insecure --silent --tlsv1.2',
+        install_opts => '--nosignature',
 }
 
 
 ## Reference
-
-
 
 Here, list the classes, types, providers, facts, etc contained in your module.
 This section should include all of the under-the-hood workings of your module so
