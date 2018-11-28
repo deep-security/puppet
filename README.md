@@ -49,32 +49,32 @@ This will default to installing the latest package from Trend Micro Deep Securit
 ## Usage
 
 To install package from a Deep Security Manager other than Trend Micro Deep Security as a Service:
-
+<pre><code>
 class { "deepsecurityagent" :
   dsmheartbeataddress => 'dsm.heartbeat.domain.tld',
   dsmconsoleaddress => 'dsm.console.domain.tld',
   dsmheartbeatport => '4120',
   dsmconsoleport => '4119',
 }
-
+</code></pre>
 To activate the agent against a managed service (tenant ID and password are optional):
-
+<pre><code>
 class { "deepsecurityagent::activation" :
   dsmtenantid => 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX',
   dsmtenantpassword => 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX',
 }
-
+</code></pre>
 To activate and request a policy (tenant ID and password are optional):
-
+<pre><code>
 class { "deepsecurityagent::activation" :
   dsmtenantid => 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX',
   dsmtenantpassword => 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX',
-  policyid => '1'
+  policyid => '1',
 }
-
+</code></pre>
 To specify download and install options for the package, e.g. insecurely download rpm, install locally and skip verification:
-
-class { "deepsecurityagent" :
+<pre><code>
+class { "deepsecurityagent" :  
   dsmheartbeataddress => 'dsm.heartbeat.domain.tld',
   dsmconsoleaddress => 'dsm.console.domain.tld',
   dsmheartbeatport => '4120',
@@ -84,7 +84,7 @@ class { "deepsecurityagent" :
   download_opts => '--insecure --silent --tlsv1.2',
   install_opts => '--nosignature',
 }
-
+</code></pre>
 
 ## Reference
 
