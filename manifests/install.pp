@@ -88,10 +88,16 @@ class deepsecurityagent::install inherits deepsecurityagent {
         }
       }
     else {
+      exec { 'Download_RHEL_Agent':
+        command	=> "curl -k ${agentsource} -o /tmp/agent.rpm",
+        creates => '/tmp/agent.rpm',
+        path => '/usr/bin/',
+      }
       package { $deepsecurityagent::params::agentpackage:
         ensure => 'installed',
         provider => 'rpm',
-        source => "${agentsource}",
+        source => "/tmp/agent.rpm",
+        require => Exec["Download_RHEL_Agent"],
       }
     }
   }
