@@ -31,8 +31,8 @@ class deepsecurityagent::install inherits deepsecurityagent {
     }
     'Amazon' : {
       case $::architecture {
-        'x86' : {$agentsource = "${dsmurl}/amzn1/i386/"}
-        'x86_64' : {$agentsource = "${dsmurl}/amzn1/x86_64/"}
+        'x86' : {$agentsource = "${dsmurl}/amzn$::operatingsystemmajrelease/i386/"}
+        'x86_64' : {$agentsource = "${dsmurl}/amzn$::operatingsystemmajrelease/x86_64/"}
       }
     }
     'Ubuntu' : {
