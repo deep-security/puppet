@@ -6,22 +6,22 @@ class deepsecurityagent::install inherits deepsecurityagent {
   case $::operatingsystem {
     'windows' : {
       case $::architecture {
-        'x86'	: {$agentsource = "${dsmurl}/Windows/i386/"}
-        'x64'	: {$agentsource = "${dsmurl}/Windows/x86_64/"}
+        'x86'  : {$agentsource = "${dsmurl}/Windows/i386/"}
+        'x64'  : {$agentsource = "${dsmurl}/Windows/x86_64/"}
       }
     }
     'RedHat', 'CentOS' : {
       case $::architecture {
         'x86' : {
           case $::operatingsystemmajrelease {
-            '4'	: {$agentsource = "${dsmurl}/RedHat_2.6.9_22.EL_i686/i386/"}
-            '5'	: {$agentsource = "${dsmurl}/RedHat_EL5/i386/"}
-            '6'	: {$agentsource = "${dsmurl}/RedHat_EL6/i386/"}
+            '4'  : {$agentsource = "${dsmurl}/RedHat_2.6.9_22.EL_i686/i386/"}
+            '5'  : {$agentsource = "${dsmurl}/RedHat_EL5/i386/"}
+            '6'  : {$agentsource = "${dsmurl}/RedHat_EL6/i386/"}
           }
         }
         'x86_64' : {
           case $::operatingsystemmajrelease {
-            '4'	: {$agentsource = "${dsmurl}/RedHat_2.6.9_34.EL_x86_64/x86_64/"}
+            '4'  : {$agentsource = "${dsmurl}/RedHat_2.6.9_34.EL_x86_64/x86_64/"}
             '5'     : {$agentsource = "${dsmurl}/RedHat_EL5/x86_64/"}
             '6'     : {$agentsource = "${dsmurl}/RedHat_EL6/x86_64/"}
             '7'     : {$agentsource = "${dsmurl}/RedHat_EL7/x86_64/"}
@@ -31,8 +31,8 @@ class deepsecurityagent::install inherits deepsecurityagent {
     }
     'Amazon' : {
       case $::architecture {
-        'x86' : {$agentsource = "${dsmurl}/amzn$::operatingsystemmajrelease/i386/"}
-        'x86_64' : {$agentsource = "${dsmurl}/amzn$::operatingsystemmajrelease/x86_64/"}
+        'x86' : {$agentsource = "${dsmurl}/amzn${::operatingsystemmajrelease}/i386/"}
+        'x86_64' : {$agentsource = "${dsmurl}/amzn${::operatingsystemmajrelease}/x86_64/"}
       }
     }
     'Ubuntu' : {
@@ -63,7 +63,7 @@ class deepsecurityagent::install inherits deepsecurityagent {
         }
       }
     }
-    default: { fail("Please check to ensure you are running an operating system supported by Deep Security Agent and this module") }
+    default: { fail('Please check to ensure you are running an operating system supported by Deep Security Agent and this module') }
   }
 
   debug("Downloading agent from ${agentsource}")
@@ -77,66 +77,67 @@ class deepsecurityagent::install inherits deepsecurityagent {
         }
         exec { 'Download_RHEL5_Agent':
           command => "curl -k ${agentfilesourceR5} -o /tmp/agent.rpm",
-          creates => "/tmp/agent.rpm",
-          path => '/usr/bin',
+          creates => '/tmp/agent.rpm',
+          path    => '/usr/bin',
         }
         package {$deepsecurityagent::params::agentpackage:
-          ensure => 'installed',
+          ensure   => 'installed',
           provider => 'rpm',
-          source => "/tmp/agent.rpm",
-          require => Exec["Download_RHEL5_Agent"],
+          source   => '/tmp/agent.rpm',
+          require  => Exec['Download_RHEL5_Agent'],
         }
       }
     else {
       exec { 'Download_RHEL_Agent':
-        command	=> "curl -k ${agentsource} -o /tmp/agent.rpm",
+        command => "curl -k ${agentsource} -o /tmp/agent.rpm",
         creates => '/tmp/agent.rpm',
-        path => '/usr/bin/',
+        path    => '/usr/bin/',
       }
       package { $deepsecurityagent::params::agentpackage:
-        ensure => 'installed',
+        ensure   => 'installed',
         provider => 'rpm',
-        source => "/tmp/agent.rpm",
-        require => Exec["Download_RHEL_Agent"],
+        source   => '/tmp/agent.rpm',
+        require  => Exec['Download_RHEL_Agent'],
       }
     }
   }
     'Suse' :{
       exec { 'Download_Suse_Agent':
-        command	=> "curl -k ${agentsource} -o /tmp/agent.rpm",
+        command => "curl -k ${agentsource} -o /tmp/agent.rpm",
         creates => '/tmp/agent.rpm',
-        path => '/usr/bin/',
+        path    => '/usr/bin/',
       }
       package { $deepsecurityagent::params::agentpackage:
-        ensure => 'installed',
+        ensure   => 'installed',
         provider => 'rpm',
-        source => '/tmp/agent.rpm',
-        require => Exec["Download_Suse_Agent"],
+        source   => '/tmp/agent.rpm',
+        require  => Exec['Download_Suse_Agent'],
       }
     }
     'Debian' :{
       exec { 'Download_Ubuntu_Agent':
-        command	=> "curl -k ${agentsource} -o /tmp/agent.deb",
+        command => "curl -k ${agentsource} -o /tmp/agent.deb",
         creates => '/tmp/agent.deb',
-        path => '/usr/bin/',
+        path    => '/usr/bin/',
       }
       package { $deepsecurityagent::params::agentpackage:
-        ensure => 'installed',
+        ensure   => 'installed',
         provider => 'dpkg',
-        source => '/tmp/agent.deb',
-        require => Exec["Download_Ubuntu_Agent"],
+        source   => '/tmp/agent.deb',
+        require  => Exec['Download_Ubuntu_Agent'],
       }
     }
     'windows' : {
       exec { 'Download_Windows_Agent':
-        command      => "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -Command \"& { [Net.ServicePointManager]::ServerCertificateValidationCallback = {\$true}; (New-Object System.Net.WebClient).DownloadFile(\\\"${agentsource}\\\", \\\"${::env_windows_installdir}\\agent.msi\\\") } \"",
-        path         => "C:\\Windows\\sysnative\\",
-        creates      => "${::env_windows_installdir}\\agent.msi"
+        command => "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -Command \"& { [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; [Net.ServicePointManager]::ServerCertificateValidationCallback = {\$true}; (New-Object System.Net.WebClient).DownloadFile(\\\"${agentsource}\\\", \\\"${facts['windows_env']['TEMP']}\\agent.msi\\\") } \"",
+        path    => "C:\\Windows\\sysnative\\",
+        creates => "${facts['windows_env']['TEMP']}\\agent.msi"
       }
       package { $deepsecurityagent::params::agentpackage:
-        ensure => 'installed',
-        source => "${::env_windows_installdir}\\agent.msi",
-        require => Exec["Download_Windows_Agent"]
+        ensure          => 'installed',
+        install_options => ['ADDLOCAL=ALL', '/l*v', "${facts['windows_env']['TEMP']}\\dsa_install.log"], #lint:ignore:140chars
+        source          => "${facts['windows_env']['TEMP']}\\agent.msi",
+        require         => Exec['Download_Windows_Agent']
 
       }
     }
